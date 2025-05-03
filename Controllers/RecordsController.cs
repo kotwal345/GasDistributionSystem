@@ -21,15 +21,19 @@ namespace CentralizedDatabaseManagementSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(string Username, string Email, string Password)
+        public IActionResult Login(string Email, string Password)
         {
-            // Dummy login check (Replace with your real login logic)
-            if (Username == "admin" && Password == "password")
+            // login check (Replace with your real login logic)
+            if (Email == "rohan@gmail.com" && Password == "password")
             {
-                return RedirectToAction("Index", "Records"); // Redirect after login
+                return RedirectToAction("Create", "Records"); // Redirect after login
             }
-            ViewBag.ErrorMessage = "Invalid login details!";
-            return View();
+            else
+            {
+                return RedirectToAction("Login", "Records");
+                //ViewBag.ErrorMessage = "Invalid login details!";
+            }
+            //return View();
         }
 
         // GET: Records

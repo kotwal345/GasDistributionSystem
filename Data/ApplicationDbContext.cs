@@ -11,5 +11,7 @@ namespace CentralizedDatabaseManagementSystem.Data
         { }
 
         public DbSet<Record> Records { get; set; }
+
+        public DbSet<Login> Users { get; set; }
     }
 }
