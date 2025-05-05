@@ -1,37 +1,210 @@
-﻿@model CentralizedDatabaseManagementSystem.Models.Record
+﻿@model CentralizedDatabaseManagementSystem.Models.Distributor
 
 @{
-    ViewData["Title"] = "Create Record";
+    ViewData["Title"] = "Create Distributor";
 }
 
-<h1>Create New Record</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
 
-<form asp-action="Create">
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            color: #d40000;
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            width: 100px;
+        }
+
+        .logout-btn {
+            float: right;
+            margin-top: -50px;
+        }
+
+        .header-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: #d40000;
+            display: inline-block;
+        }
+
+        .sub-header {
+            float: right;
+            font-size: 18px;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        .form-section {
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row mt-4 mb-3">
+            <div class="col-md-12 d-flex justify-content-between align-items-center">
+                <div class="header-text">HP GAS CDCMS</div>
+                <div class="sub-header">
+                    NEERAJ GAS SERVICE (#41052972) <a href="@Url.Action("Login", "Records")" class="btn btn-danger float-right">Logout</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <div class="form-title">Distributor Information</div>
+
+            <form asp-action="Create" method="post">
+                <div class="form-row form-section">
+                    <div class="form-group col-md-6">
+                        <label>Distributor Code</label>
+                        <input asp-for="DistributorCode" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Distributor Name</label>
+                        <input asp-for="DistributorName" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-row form-section">
+                    <div class="form-group col-md-6">
+                        <label>Owner Name</label>
+                        <input asp-for="OwnerName" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Dealer KYC Updated (Yes/No)</label>
+                        <select asp-for="KYCUpdated" class="form-control">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row form-section">
+                    <div class="form-group col-md-6">
+                        <label>Date of Commissioning</label>
+                        <input asp-for="CommissioningDate" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Dealership Agreement Valid From</label>
+                        <input asp-for="AgreementValidFrom" type="date" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-row form-section">
+                    <div class="form-group col-md-6">
+                        <label>Dealership Agreement Valid Upto</label>
+                        <input asp-for="AgreementValidUpto" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Distributor Address</label>
+                        <input asp-for="Address" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-row form-section">
+                    <div class="form-group col-md-4">
+                        <label>Town / City</label>
+                        <input asp-for="City" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>State</label>
+                        <input asp-for="State" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Pin</label>
+                        <input asp-for="Pin" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-row form-section">
+                    <div class="form-group col-md-4">
+                        <label>Phone No</label>
+                        <input asp-for="Phone" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Mobile</label>
+                        <input asp-for="Mobile" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Emergency Contact No</label>
+                        <input asp-for="EmergencyContact" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-row form-section">
+                    <div class="form-group col-md-4">
+                        <label>Insurance Expiry Date</label>
+                        <input asp-for="InsuranceExpiryDate" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>GSTIN</label>
+                        <input asp-for="GSTIN" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Email</label>
+                        <input asp-for="Email" type="email" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-row form-section">
+                    <div class="form-group col-md-4">
+                        <label>PNG Operators Available (Yes/No)</label>
+                        <select asp-for="PNGOperatorsAvailable" class="form-control">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>PNG Firm Name</label>
+                        <input asp-for="PNGFirmName" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Transporter (Plant)</label>
+                        <select asp-for="Transporter" class="form-control">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row form-section">
+                    <div class="form-group col-md-4">
+                        <label>No. of Vehicles (Plant)</label>
+                        <input asp-for="NoOfVehicles" type="number" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="@Url.Action("Details", "Records", new { id = Model.Id })" class="btn btn-secondary ml-2">Go to Details</a>
+                </div>
+
+            </form>
+        </div>
     </div>
-
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Phone"></label>
-        <input asp-for="Phone" class="form-control" />
-        <span asp-validation-for="Phone" class="text-danger"></span>
-    </div>
-
-    <br />
-    <button type="submit" class="btn btn-success">Create</button>
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-</form>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
+</body>
+</html>

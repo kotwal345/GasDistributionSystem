@@ -14,7 +14,6 @@ namespace CentralizedDatabaseManagementSystem.Controllers
             _context = context;
         }
 
-        [HttpGet]
         public IActionResult Login()
         {
             return View();
@@ -23,17 +22,26 @@ namespace CentralizedDatabaseManagementSystem.Controllers
         [HttpPost]
         public IActionResult Login(string Email, string Password)
         {
-            // login check (Replace with your real login logic)
+
             if (Email == "rohan@gmail.com" && Password == "password")
             {
-                return RedirectToAction("Create", "Records"); // Redirect after login
+                return RedirectToAction("Create", "Records");
             }
             else
             {
-                return RedirectToAction("Login", "Records");
-                //ViewBag.ErrorMessage = "Invalid login details!";
+                ViewBag.ErrorMessage = "Invalid login details!";
+                return View(); // Returns the login view with error
             }
-            //return View();
+
+        }
+
+        public IActionResult Logout()
+        {
+            // Clear session or authentication cookie here if used
+            // HttpContext.Session.Clear();  // if using session
+            // SignOut();                   // if using cookie-based auth
+
+            return RedirectToAction("Login", "Account");
         }
 
         // GET: Records
@@ -42,16 +50,6 @@ namespace CentralizedDatabaseManagementSystem.Controllers
             return View(await _context.Records.ToListAsync());
         }
 
-        // GET: Records/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null) return NotFound();
-
-            var record = await _context.Records.FirstOrDefaultAsync(m => m.Id == id);
-            if (record == null) return NotFound();
-
-            return View(record);
-        }
 
         // GET: Records/Create
         public IActionResult Create()
@@ -62,16 +60,28 @@ namespace CentralizedDatabaseManagementSystem.Controllers
         // POST: Records/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Email,Phone")] Record record)
+        public async Task<IActionResult> Create(Distributor distributor)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(record);
+                _context.Add(distributor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(record);
+            return View(distributor);
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var distributor = await _context.Distributors.FindAsync(id);
+            if (distributor == null)
+            {
+                return NotFound();
+            }
+
+            return View(distributor);
+        }
+
 
         // GET: Records/Edit/5
         public async Task<IActionResult> Edit(int? id)
