@@ -54,7 +54,7 @@ namespace CentralizedDatabaseManagementSystem.Controllers
         // GET: Records/Create
         public IActionResult Create()
         {
-            return View();
+            return View(new Distributor());
         }
 
         // POST: Records/Create

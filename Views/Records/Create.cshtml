@@ -1,5 +1,6 @@
 ﻿@model CentralizedDatabaseManagementSystem.Models.Distributor
 
+
 @{
     ViewData["Title"] = "Create Distributor";
 }
@@ -69,7 +70,7 @@
             <div class="col-md-12 d-flex justify-content-between align-items-center">
                 <div class="header-text">HP GAS CDCMS</div>
                 <div class="sub-header">
-                    NEERAJ GAS SERVICE (#41052972) <a href="@Url.Action("Login", "Records")" class="btn btn-danger float-right">Logout</a>
+                    TATA GAS SERVICE &nbsp;&nbsp;<a asp-action="Login" class="btn btn-danger">Log Out</a>
                 </div>
             </div>
         </div>
@@ -199,8 +200,8 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <a href="@Url.Action("Details", "Records", new { id = Model.Id })" class="btn btn-secondary ml-2">Go to Details</a>
+                    <button type="submit" class="btn btn-primary">Save</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a asp-action="Details" class="btn btn-info">View Details</a>
                 </div>
 
             </form>
