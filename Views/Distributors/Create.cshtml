@@ -1,6 +1,5 @@
 ﻿@model CentralizedDatabaseManagementSystem.Models.Distributor
 
-
 @{
     ViewData["Title"] = "Create Distributor";
 }
@@ -11,9 +10,12 @@
     <meta charset="utf-8" />
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         body {
-            background-color: #f8f9fa;
+            background: linear-gradient(to right, #f8f9fa, #eaeaea);
+            font-family: 'Segoe UI', sans-serif;
         }
 
         .form-container {
@@ -25,7 +27,7 @@
         }
 
         .form-title {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
             text-align: center;
             color: #d40000;
@@ -36,27 +38,25 @@
             font-weight: 500;
         }
 
-        .btn-primary {
-            width: 100px;
-        }
-
-        .logout-btn {
-            float: right;
-            margin-top: -50px;
+        .form-control:focus {
+            border-color: #d40000;
+            box-shadow: 0 0 0 0.2rem rgba(212, 0, 0, 0.25);
         }
 
         .header-text {
             font-size: 28px;
             font-weight: bold;
             color: #d40000;
-            display: inline-block;
         }
 
         .sub-header {
-            float: right;
             font-size: 18px;
             font-weight: 500;
-            margin-top: 10px;
+        }
+
+        .tooltip-inner {
+            background-color: #343a40;
+            color: #fff;
         }
 
         .form-section {
@@ -75,18 +75,28 @@
             </div>
         </div>
 
+        <!-- Success or error alert placeholder -->
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success">@TempData["Success"]</div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger">@TempData["Error"]</div>
+        }
+
         <div class="form-container">
             <div class="form-title">Distributor Information</div>
 
-            <form asp-action="Create" method="post">
+            <form asp-action="Create" method="post" novalidate>
                 <div class="form-row form-section">
                     <div class="form-group col-md-6">
-                        <label>Distributor Code</label>
-                        <input asp-for="DistributorCode" class="form-control" />
+                        <label data-toggle="tooltip" title="Enter unique code">Distributor Code</label>
+                        <input asp-for="DistributorCode" class="form-control" placeholder="e.g. D1234" />
                     </div>
                     <div class="form-group col-md-6">
                         <label>Distributor Name</label>
-                        <input asp-for="DistributorName" class="form-control" />
+                        <input asp-for="DistributorName" class="form-control" placeholder="Enter distributor name" />
                     </div>
                 </div>
 
@@ -96,8 +106,9 @@
                         <input asp-for="OwnerName" class="form-control" />
                     </div>
                     <div class="form-group col-md-6">
-                        <label>Dealer KYC Updated (Yes/No)</label>
+                        <label>KYC Updated</label>
                         <select asp-for="KYCUpdated" class="form-control">
+                            <option value="">--Select--</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
@@ -110,25 +121,25 @@
                         <input asp-for="CommissioningDate" type="date" class="form-control" />
                     </div>
                     <div class="form-group col-md-6">
-                        <label>Dealership Agreement Valid From</label>
+                        <label>Agreement Valid From</label>
                         <input asp-for="AgreementValidFrom" type="date" class="form-control" />
                     </div>
                 </div>
 
                 <div class="form-row form-section">
                     <div class="form-group col-md-6">
-                        <label>Dealership Agreement Valid Upto</label>
+                        <label>Agreement Valid Upto</label>
                         <input asp-for="AgreementValidUpto" type="date" class="form-control" />
                     </div>
                     <div class="form-group col-md-6">
-                        <label>Distributor Address</label>
+                        <label>Address</label>
                         <input asp-for="Address" class="form-control" />
                     </div>
                 </div>
 
                 <div class="form-row form-section">
                     <div class="form-group col-md-4">
-                        <label>Town / City</label>
+                        <label>City</label>
                         <input asp-for="City" class="form-control" />
                     </div>
                     <div class="form-group col-md-4">
@@ -143,7 +154,7 @@
 
                 <div class="form-row form-section">
                     <div class="form-group col-md-4">
-                        <label>Phone No</label>
+                        <label>Phone</label>
                         <input asp-for="Phone" class="form-control" />
                     </div>
                     <div class="form-group col-md-4">
@@ -151,14 +162,14 @@
                         <input asp-for="Mobile" class="form-control" />
                     </div>
                     <div class="form-group col-md-4">
-                        <label>Emergency Contact No</label>
+                        <label>Emergency Contact</label>
                         <input asp-for="EmergencyContact" class="form-control" />
                     </div>
                 </div>
 
                 <div class="form-row form-section">
                     <div class="form-group col-md-4">
-                        <label>Insurance Expiry Date</label>
+                        <label>Insurance Expiry</label>
                         <input asp-for="InsuranceExpiryDate" type="date" class="form-control" />
                     </div>
                     <div class="form-group col-md-4">
@@ -173,8 +184,9 @@
 
                 <div class="form-row form-section">
                     <div class="form-group col-md-4">
-                        <label>PNG Operators Available (Yes/No)</label>
+                        <label>PNG Operators Available</label>
                         <select asp-for="PNGOperatorsAvailable" class="form-control">
+                            <option value="">--Select--</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
@@ -184,8 +196,9 @@
                         <input asp-for="PNGFirmName" class="form-control" />
                     </div>
                     <div class="form-group col-md-4">
-                        <label>Transporter (Plant)</label>
+                        <label>Transporter</label>
                         <select asp-for="Transporter" class="form-control">
+                            <option value="">--Select--</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
@@ -194,18 +207,23 @@
 
                 <div class="form-row form-section">
                     <div class="form-group col-md-4">
-                        <label>No. of Vehicles (Plant)</label>
+                        <label>No. of Vehicles</label>
                         <input asp-for="NoOfVehicles" type="number" class="form-control" />
                     </div>
                 </div>
 
                 <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-primary">Save</button> &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a asp-action="Details" class="btn btn-info">View Details</a>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a asp-action="Index" class="btn btn-info ml-2">View Records</a>
                 </div>
-
             </form>
         </div>
     </div>
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 </body>
 </html>

@@ -35,7 +35,7 @@ namespace CentralizedDatabaseManagementSystem
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Records}/{action=Login}/{id?}");
+                pattern: "{controller=Distributors}/{action=Login}/{id?}");
 
             app.Run();
         }

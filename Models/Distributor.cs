@@ -7,7 +7,7 @@
         public string DistributorName { get; set; }
         public string OwnerName { get; set; }
         public DateTime CommissioningDate { get; set; }
-        public string KYCUpdated { get; set; } // "Yes"/"No"
+        public string KYCUpdated { get; set; } 
         public DateTime AgreementValidFrom { get; set; }
         public DateTime AgreementValidUpto { get; set; }
         public string Address { get; set; }

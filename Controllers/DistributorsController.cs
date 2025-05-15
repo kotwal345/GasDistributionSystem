@@ -1,18 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using CentralizedDatabaseManagementSystem.Data;
+﻿using CentralizedDatabaseManagementSystem.Data;
 using CentralizedDatabaseManagementSystem.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CentralizedDatabaseManagementSystem.Controllers
 {
-    public class RecordsController : Controller
+    public class DistributorsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public RecordsController(ApplicationDbContext context)
+        public DistributorsController(ApplicationDbContext context)
         {
             _context = context;
         }
+
 
         public IActionResult Login()
         {
@@ -41,23 +42,23 @@ namespace CentralizedDatabaseManagementSystem.Controllers
             // HttpContext.Session.Clear();  // if using session
             // SignOut();                   // if using cookie-based auth
 
-            return RedirectToAction("Login", "Records");
+            return RedirectToAction("Login", "Account");
         }
 
-        // GET: Records
+        //
+        // GET: Distributors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Records.ToListAsync());
+            return View(await _context.Distributors.ToListAsync());
         }
 
-
-        // GET: Records/Create
+        // GET: Distributors/Create
         public IActionResult Create()
         {
             return View(new Distributor());
         }
 
-        // POST: Records/Create
+        // POST: Distributors/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Distributor distributor)
@@ -71,9 +72,93 @@ namespace CentralizedDatabaseManagementSystem.Controllers
             return View(distributor);
         }
 
-        public async Task<IActionResult> Details(int id)
+        // Other methods like Details, Edit, Delete (if needed)...
+
+        // GET: Distributors/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var distributor = await _context.Distributors.FindAsync(id);
+
+            if (distributor == null)
+                return NotFound();
+
+            return View(distributor);
+        }
+
+        // POST: Distributors/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Distributor distributor)
+        {
+            if (id != distributor.Id)
+                return NotFound();
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(distributor);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!DistributorExists(distributor.Id))
+                        return NotFound();
+                    else
+                        throw;
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(distributor);
+        }
+
+        // GET: Distributors/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var distributor = await _context.Distributors
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (distributor == null)
+                return NotFound();
+
+            return View(distributor);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var distributor = await _context.Distributors.FindAsync(id);
+            if (distributor != null)
+            {
+                _context.Distributors.Remove(distributor);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool DistributorExists(int id)
+        {
+            return _context.Distributors.Any(e => e.Id == id);
+        }
+
+        // GET: Distributors/Details/5
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var distributor = _context.Distributors
+                .FirstOrDefault(m => m.Id == id);
+
             if (distributor == null)
             {
                 return NotFound();
@@ -81,68 +166,6 @@ namespace CentralizedDatabaseManagementSystem.Controllers
 
             return View(distributor);
         }
-
-
-        // GET: Records/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null) return NotFound();
-
-            var record = await _context.Records.FindAsync(id);
-            if (record == null) return NotFound();
-
-            return View(record);
-        }
-
-        // POST: Records/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,Phone")] Record record)
-        {
-            if (id != record.Id) return NotFound();
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(record);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RecordExists(record.Id)) return NotFound();
-                    else throw;
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(record);
-        }
-
-        // GET: Records/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null) return NotFound();
-
-            var record = await _context.Records.FirstOrDefaultAsync(m => m.Id == id);
-            if (record == null) return NotFound();
-
-            return View(record);
-        }
-
-        // POST: Records/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var record = await _context.Records.FindAsync(id);
-            _context.Records.Remove(record);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool RecordExists(int id)
-        {
-            return _context.Records.Any(e => e.Id == id);
-        }
     }
+
 }

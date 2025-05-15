@@ -1,0 +1,118 @@
+﻿@model CentralizedDatabaseManagementSystem.Models.Distributor
+
+@{
+    ViewData["Title"] = "Edit Distributor";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Distributor</h2>
+
+        <form asp-action="Edit" method="post">
+            <div class="form-group">
+                <label>Distributor Code</label>
+                <input asp-for="DistributorCode" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Distributor Name</label>
+                <input asp-for="DistributorName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Owner Name</label>
+                <input asp-for="OwnerName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Dealer KYC Updated (Yes/No)</label>
+                <select asp-for="KYCUpdated" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Date of Commissioning</label>
+                <input asp-for="CommissioningDate" type="date" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Dealership Agreement Valid From</label>
+                <input asp-for="AgreementValidFrom" type="date" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Dealership Agreement Valid Upto</label>
+                <input asp-for="AgreementValidUpto" type="date" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Distributor Address</label>
+                <input asp-for="Address" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Town / City</label>
+                <input asp-for="City" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>State</label>
+                <input asp-for="State" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Pin</label>
+                <input asp-for="Pin" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Phone No</label>
+                <input asp-for="Phone" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Mobile</label>
+                <input asp-for="Mobile" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Emergency Contact No</label>
+                <input asp-for="EmergencyContact" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Insurance Expiry Date</label>
+                <input asp-for="InsuranceExpiryDate" type="date" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>GSTIN</label>
+                <input asp-for="GSTIN" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>PNG Operators Available (Yes/No)</label>
+                <select asp-for="PNGOperatorsAvailable" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>PNG Firm Name</label>
+                <input asp-for="PNGFirmName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Transporter (Plant)</label>
+                <select asp-for="Transporter" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>No. of Vehicles (Plant)</label>
+                <input asp-for="NoOfVehicles" class="form-control" type="number" />
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+
+        <a asp-action="Index" class="btn btn-info">Back to List</a>
+    </div>
+</body>
+</html>

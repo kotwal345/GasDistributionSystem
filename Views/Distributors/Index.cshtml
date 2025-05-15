@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CentralizedDatabaseManagementSystem.Models.Distributor>
+
+@{
+    ViewData["Title"] = "Distributor List";
+}
+
+<h2 class="text-center text-primary mt-4">Distributor List</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New Distributor</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Owner</th>
+            <th>KYC</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.DistributorCode</td>
+                <td>@item.DistributorName</td>
+                <td>@item.OwnerName</td>
+                <td>@item.KYCUpdated</td>
+                <td>@item.City</td>
+                <td>@item.State</td>
+                <td>@item.Email</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Details</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
