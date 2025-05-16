@@ -10,7 +10,6 @@ namespace CentralizedDatabaseManagementSystem.Data
         : base(options)
         { }
 
-        public DbSet<Record> Records { get; set; }
         public DbSet<Distributor> Distributors { get; set; }
 
         

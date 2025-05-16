@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CentralizedDatabaseManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250513082229_First-Migration")]
-    partial class FirstMigration
+    [Migration("20250516145357_Initial-Migration1")]
+    partial class InitialMigration1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,13 +70,6 @@ namespace CentralizedDatabaseManagementSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("InsuranceExpiryDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("KYCUpdated")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Mobile")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -85,14 +78,6 @@ namespace CentralizedDatabaseManagementSystem.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("OwnerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PNGFirmName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PNGOperatorsAvailable")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -108,33 +93,9 @@ namespace CentralizedDatabaseManagementSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Transporter")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Distributors");
-                });
-
-            modelBuilder.Entity("CentralizedDatabaseManagementSystem.Models.Login", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<int>("Email")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("CentralizedDatabaseManagementSystem.Models.Record", b =>

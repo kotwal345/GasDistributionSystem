@@ -14,8 +14,13 @@
 <body>
     <div class="container">
         <h2>Edit Distributor</h2>
-
+        
         <form asp-action="Edit" method="post">
+            <div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                &nbsp;
+                <a asp-action="Index" class="btn btn-info">Back to List</a>
+            </div>
             <div class="form-group">
                 <label>Distributor Code</label>
                 <input asp-for="DistributorCode" class="form-control" />
@@ -28,13 +33,7 @@
                 <label>Owner Name</label>
                 <input asp-for="OwnerName" class="form-control" />
             </div>
-            <div class="form-group">
-                <label>Dealer KYC Updated (Yes/No)</label>
-                <select asp-for="KYCUpdated" class="form-control">
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
-            </div>
+         
             <div class="form-group">
                 <label>Date of Commissioning</label>
                 <input asp-for="CommissioningDate" type="date" class="form-control" />
@@ -75,10 +74,7 @@
                 <label>Emergency Contact No</label>
                 <input asp-for="EmergencyContact" class="form-control" />
             </div>
-            <div class="form-group">
-                <label>Insurance Expiry Date</label>
-                <input asp-for="InsuranceExpiryDate" type="date" class="form-control" />
-            </div>
+           
             <div class="form-group">
                 <label>GSTIN</label>
                 <input asp-for="GSTIN" class="form-control" />
@@ -87,32 +83,17 @@
                 <label>Email</label>
                 <input asp-for="Email" class="form-control" />
             </div>
-            <div class="form-group">
-                <label>PNG Operators Available (Yes/No)</label>
-                <select asp-for="PNGOperatorsAvailable" class="form-control">
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>PNG Firm Name</label>
-                <input asp-for="PNGFirmName" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label>Transporter (Plant)</label>
-                <select asp-for="Transporter" class="form-control">
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
-            </div>
+            
+           
+            
             <div class="form-group">
                 <label>No. of Vehicles (Plant)</label>
                 <input asp-for="NoOfVehicles" class="form-control" type="number" />
             </div>
-            <button type="submit" class="btn btn-primary">Save</button>
+            
         </form>
 
-        <a asp-action="Index" class="btn btn-info">Back to List</a>
+       
     </div>
 </body>
 </html>
